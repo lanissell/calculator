@@ -23,12 +23,9 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
 
-      - name: Get directory
-        run: ls
-
       - name: Run tests
         run: |
-          pytest TestCalculator.py
+          pytest calculator/TestCalculator.py
 
   deploy:
     runs-on: ubuntu-latest  # Для деплоя используем Ubuntu
