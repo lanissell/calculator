@@ -25,7 +25,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest TestCalculator.py
+          pytest \TestCalculator.py
 
   deploy:
     runs-on: ubuntu-latest  # Для деплоя используем Ubuntu
