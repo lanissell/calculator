@@ -1,0 +1,50 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Запускать на push в основную ветку
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Для тестов можно использовать Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+
+      - name: Run tests
+        run: |
+          pytest test_calculator.py
+
+  deploy:
+    runs-on: ubuntu-latest  # Для деплоя используем Ubuntu
+    needs: test  # Этот шаг выполняется только после успешного тестирования
+    if: success()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 10.10.3.2 >> ~/.ssh/known_hosts  # Добавляем сервер в список известных
+          
+      - name: Deploy to Kali Linux
+        run: |
+          ssh kali@10.10.3.2 "cd /home/kali/calculator/ && git pull origin main && python main.py"
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
