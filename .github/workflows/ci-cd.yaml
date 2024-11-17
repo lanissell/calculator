@@ -7,7 +7,7 @@ on:
 
 jobs:
   test:
-    runs-on: windows-latest  # Для тестов можно использовать Ubuntu
+    runs-on: ubuntu-latest  # Для тестов можно использовать Ubuntu
 
     steps:
       - name: Checkout code
@@ -23,9 +23,12 @@ jobs:
           python -m pip install --upgrade pip
           pip install pytest
 
+      - name: Get directory
+        run: ls
+
       - name: Run tests
         run: |
-          pytest \TestCalculator.py
+          pytest TestCalculator.py
 
   deploy:
     runs-on: ubuntu-latest  # Для деплоя используем Ubuntu
