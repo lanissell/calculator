@@ -38,9 +38,8 @@ jobs:
 
       - name: Deploy to Linux
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} denis@192.168.0.211 << 'EOF'
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -p 2222 denis@192.168.0.211 << 'EOF'
             cd /home/Projects/calculator/
             git pull origin main
             cd calculator
-            python main.py
           EOF
