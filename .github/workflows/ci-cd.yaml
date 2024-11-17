@@ -41,10 +41,10 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 10.10.3.2 >> ~/.ssh/known_hosts  # Добавляем сервер в список известных
+          ssh-keyscan -H 192.168.0.211 >> ~/.ssh/known_hosts  # Добавляем сервер в список известных
           
-      - name: Deploy to Kali Linux
+      - name: Deploy to Linux
         run: |
-          ssh kali@10.10.3.2 "cd /home/kali/calculator/ && git pull origin main && python main.py"
+          ssh denis@192.168.0.211 "cd /home/Projects/calculator/ && cd /calculator && git pull origin main && python main.py"
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
