@@ -36,15 +36,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up SSH key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H 192.168.0.211 >> ~/.ssh/known_hosts  # Добавляем сервер в список известных
-          
       - name: Deploy to Linux
         run: |
-          ssh denis@192.168.0.211 "cd /home/Projects/calculator/ && cd /calculator && git pull origin main && python main.py"
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} denis@192.168.0.211 << 'EOF'
+            cd /home/Projects/calculator/
+            git pull origin main
+            cd calculator
+            python main.py
+          EOF
