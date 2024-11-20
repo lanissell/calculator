@@ -40,6 +40,6 @@ jobs:
         run: |
             sudo mkdir -p /var/www/project
             cd /var/www/project
-            git clone ${{ vars.vars.REPOURL }}
+            git clone https://github.com/lanissell/calculator.git
             pythom calculator/main.py
             echo "Successfully deployed"
