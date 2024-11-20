@@ -44,4 +44,7 @@ jobs:
             ls -ls
             cd calculator
             python calculator/main.py
+            5
+            5
+            5
             echo "Successfully deployed"
