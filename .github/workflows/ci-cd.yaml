@@ -28,8 +28,8 @@ jobs:
           pytest calculator/TestCalculator.py
 
   deploy:
-    runs-on: ubuntu-latest  # Для деплоя используем Ubuntu
-    needs: test  # Этот шаг выполняется только после успешного тестирования
+    runs-on: ubuntu-latest  
+    needs: test  
     if: success()
 
     steps:
@@ -43,8 +43,5 @@ jobs:
             sudo git clone https://github.com/lanissell/calculator.git
             ls -ls
             cd calculator
-            python calculator/main.py
-            5
-            5
-            5
+            python calculator/main.py 1000000 5 15
             echo "Successfully deployed"
