@@ -36,14 +36,10 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Ping the server to check connectivity
-        run: |
-          ping -c 4 192.168.0.211
-
       - name: Deploy to Linux
         run: |
-          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} -p 2222 denis@192.168.0.211 << 'EOF'
-            cd /home/Projects/calculator/
-            git pull origin main
-            cd calculator
-          EOF
+            sudo apt-get update
+            sudo apt-get install -y rsync
+            sudo mkdir -p /var/www/project
+            sudo rsync -av —no-perms —no-owner —no-group —exclude ".git" ./ /var/www/project
+            echo "Successfully deployed"
