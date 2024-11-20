@@ -42,6 +42,6 @@ jobs:
             cd /var/www/project
             sudo git clone https://github.com/lanissell/calculator.git
             ls -ls
-            cd claculator
+            cd calculator
             python calculator/main.py
             echo "Successfully deployed"
