@@ -16,8 +16,8 @@ def test_calculate_monthly_payment_zero_interest():
 
 def test_calculate_monthly_payment_large_loan():
     """Тест для большого кредита"""
-    result = bc.calculate_monthly_payment(1000000, 7, 30)
-    assert result == pytest.approx(6652.42, rel=1e-2)
+    result = bc.calculate_monthly_payment(10000000, 7, 30)
+    assert result == pytest.approx(66530.249, rel=1e-2)
 
 
 def test_calculate_monthly_payment_small_loan():

@@ -15,6 +15,7 @@ if __name__ == "__main__":
         monthly_payment = bc.calculate_monthly_payment(principal, annual_rate, years)
 
         print(f"\nЕжемесячный платеж: {monthly_payment:.2f} руб.")
+
     except ValueError:
         print("Ошибка: проверьте правильность введенных данных. Все значения должны быть числами.")
         sys.exit(1)
