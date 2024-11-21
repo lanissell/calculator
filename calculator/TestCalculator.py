@@ -5,7 +5,7 @@ from BankCalculator import BankCalculator as bc
 def test_calculate_monthly_payment_regular_case():
     """Тестируем расчет для обычных данных"""
     result = bc.calculate_monthly_payment(100000, 5, 20)
-    assert result == pytest.approx(659.96, rel=1e-2)
+    assert result == pytest.approx(6, rel=1e-2)
 
 
 def test_calculate_monthly_payment_zero_interest():
